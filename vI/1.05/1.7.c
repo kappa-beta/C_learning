@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-
 int main() {
-	char val = EOF;
-	printf("%c\n", val);
-}	
+	int val = EOF;
+	printf("%d\n", val);
+}
