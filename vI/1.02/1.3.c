@@ -1,6 +1,9 @@
+/*Упражнение 1.3. Усовершенствуйте программу преобразования температур таким образом, чтобы над
+таблицей она печатала заголовок.*/
+
 #include <stdio.h>
 /* печать таблицы температур по Фаренгейту и Цельсию для fahr = 0, 20, ..., 300 */
-int main() {
+int main(void) {
 	float fahr, celsius;
 	int lower, upper, step;
 
@@ -16,4 +19,5 @@ int main() {
 		printf ("%3.0f %6.1f\n", fahr, celsius);
 		fahr = fahr + step;
 	}
+	return 0;
 }

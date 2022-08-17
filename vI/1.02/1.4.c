@@ -1,6 +1,9 @@
+/*Упражнение 1.4. Напишите программу, которая будет печатать таблицу соответствия температур по Цельсию
+температурам по Фаренгейту.*/
+
 #include <stdio.h>
 /* печать таблицы температур по Фаренгейту и Цельсию для fahr = 0, 20, ..., 300 */
-int main() {
+int main(void) {
 	float fahr, celsius;
 	int lower, upper, step;
 
@@ -18,4 +21,5 @@ int main() {
 		printf ("%3.0f %6.0f\n", celsius, fahr);
 		celsius = celsius + step;
 	}
+	return 0;
 }
