@@ -1,50 +1,53 @@
-/*Подсчёт символов: цифр, символов-разделителей и всех других символов*/
+/*Упражнение 1.13. Напишите программу, печатающую гистограммы длин вводимых слов. Гистограмму легко
+рисовать горизонтальными полосами. Рисование вертикальными полосами — более трудная задача.*/
 
 #include <stdio.h>
 
-#define WORDLENGTH 32
-#define DIAGRAM 100
-#define IN 1
-#define OUT 0
+#define WORDLENGTH 16 // максимальная длина слова
+#define DIAGRAM 32
 
 int main(void) {
     int c, i, k = 0, sl = 0;
-    int state = OUT;
     int diagram[DIAGRAM];
+    int row, col;
 
     // входящий поток
     while((c = getchar()) != EOF) {
-        // ++sl;
-        // if(c == '\n' || c == '\t' || c == ' ') {
-        //     diagram[k] = sl - 1;
-        //     sl = 0;
-        //     ++k;
-        // }
-        if(c != '\n' || c != '\t' || c != ' ') {
-            // state = IN;
-            ++sl;
-        }
-        else if(c == '\n' || c == '\t' || c == ' ') {
-            // state = OUT;
-            diagram[k] = sl - 1;
+        if((c == '\n' || c == '\t' || c == ' ') && sl > 0) {
+            if(sl > WORDLENGTH)
+                sl = WORDLENGTH;
+            diagram[k] = sl;
             sl = 0;
             ++k;
-            while((c = getchar()) == '\n' || c == '\t' || c == ' ') {
-                ;
-            }
         }
-        else
+        else {
             ++sl;
+        }
     }
 
     // заполнение остатка массива нулями
-    for(i = k; i < DIAGRAM; ++i) {
-        diagram[i] = 0;
+    if(k < DIAGRAM) {
+        for(i = k; i < DIAGRAM; ++i) {
+            diagram[i] = 0;
+        }
     }
 
     // вывод значений массива
+    printf("\nWord count array:\n");
     for(i = 0; i < DIAGRAM; ++i) {
         printf("%d ", diagram[i]);
+    }
+
+    // вывод диаграммы длины слов
+    printf("\n\nWord count diagram:\n");
+    for(row = WORDLENGTH; row >= 0; --row) {
+        for(col = 0; col < DIAGRAM; ++col) {
+            if(diagram[col] <= row)
+                printf("  ");
+            else
+                printf(" |");
+        }
+        printf("\n");
     }
 
     return 0;
