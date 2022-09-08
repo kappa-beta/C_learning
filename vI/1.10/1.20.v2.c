@@ -15,22 +15,23 @@ int main(void) {
     int len;
     char line[MAXLINE];
 
-    while ((len = getline(line, MAXLINE)) > 0) {
+    while((len = getline(line, MAXLINE)) > 0) {
         printf("%d %s\n", len, line);
+        // printf("%s", line);
     }
 
     return 0;
 }
 
-int getline (char s[], int l) {
+int getline(char s[], int lim) {
     int c;
     int i = 0;
 
-    while ((c = getchar()) != EOF && c != '\n' && i < l - 1) {
+    while(i < lim - 1 && (c = getchar()) != EOF && c != '\n') {
         s[i] = c;
         ++i;
     }
-    if (c == '\n') {
+    if(c == '\n') {
         s[i] = c;
         ++i;
     }
