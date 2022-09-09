@@ -5,8 +5,8 @@
 
 #include <stdio.h>
 
-#define MAXLINE 5
-#define TAB 4
+#define MAXLINE 1000
+#define TAB 8
 
 //Prototype
 int getline(char line[], int limit);
@@ -17,17 +17,22 @@ int main(void) {
 
     while((len = getline(line, MAXLINE)) > 0) {
         printf("%d %s\n", len, line);
-        // printf("%s", line);
     }
 
     return 0;
 }
 
 int getline(char s[], int lim) {
-    int c;
+    int c, tab;
     int i = 0;
 
     while(i < lim - 1 && (c = getchar()) != EOF && c != '\n') {
+        if(c == '\t') {
+            for(tab = TAB - (i - (i / TAB) * TAB); tab > 0; --tab) {
+                s[i] = '_';
+                ++i;
+            }
+        }
         s[i] = c;
         ++i;
     }
