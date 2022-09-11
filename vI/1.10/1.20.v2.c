@@ -16,7 +16,7 @@ int main(void) {
     char line[MAXLINE];
 
     while((len = getline(line, MAXLINE)) > 0) {
-        printf("%d %s\n", len, line);
+        printf("%s", line);
     }
 
     return 0;
@@ -28,13 +28,16 @@ int getline(char s[], int lim) {
 
     while(i < lim - 1 && (c = getchar()) != EOF && c != '\n') {
         if(c == '\t') {
-            for(tab = TAB - (i - (i / TAB) * TAB); tab > 0; --tab) {
+            tab = TAB - (i - (i / TAB) * TAB);
+            for(tab; tab > 0; --tab) {
                 s[i] = '_';
                 ++i;
             }
         }
-        s[i] = c;
-        ++i;
+        else {
+            s[i] = c;
+            ++i;
+        }
     }
     if(c == '\n') {
         s[i] = c;
